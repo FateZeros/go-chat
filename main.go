@@ -10,6 +10,7 @@ import (
 func main() {
 	// 项目配置
 	utils.InitConfig()
+	utils.InitMySQL()
 
 	r := router.Router()
 	println("port: ", viper.GetString("port.server"))
