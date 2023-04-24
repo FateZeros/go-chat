@@ -1,0 +1,5 @@
+mysql:
+  dns: root:123456@tcp(192.168.1.18:3308)/go-chat?charset=utf8mb4&parseTime=True&loc=Local
+redis:
+port:
+  server: ":6062"
