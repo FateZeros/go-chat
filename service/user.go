@@ -1,6 +1,8 @@
 package service
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+)
 
 // CreateUser
 // @Summary 新增用户
