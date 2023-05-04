@@ -13,6 +13,6 @@ func main() {
 	utils.InitMySQL()
 
 	r := router.Router()
-	println("port: ", viper.GetString("port.server"))
+	println("server run port: ", viper.GetString("port.server"))
 	r.Run(viper.GetString("port.server")) // listen and serve on 0.0.0.0:8080
 }

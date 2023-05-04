@@ -10,10 +10,8 @@ import (
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
-)
 
-var (
-	DB *gorm.DB
+	"go-chat/global/orm"
 )
 
 func InitConfig() {
@@ -37,6 +35,6 @@ func InitMySQL() {
 		},
 	)
 
-	DB, _ = gorm.Open(mysql.Open(viper.GetString("mysql.dns")), &gorm.Config{Logger: newLogger})
+	orm.DB, _ = gorm.Open(mysql.Open(viper.GetString("mysql.dns")), &gorm.Config{Logger: newLogger})
 	fmt.Println("MySQL inited...")
 }

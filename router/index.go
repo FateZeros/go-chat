@@ -19,5 +19,7 @@ func Router() *gin.Engine {
 	// 首页
 	r.GET("/", service.GetIndex)
 
+	r.POST("/user", service.CreateUser)
+
 	return r
 }
