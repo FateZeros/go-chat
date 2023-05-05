@@ -11,11 +11,10 @@ import (
 // CreateUser
 // @Summary 新增用户
 // @Tags 用户模块
-// @param name query string false "用户名"
-// @param password query string false "密码"
-// @param repassword query string false "确认密码"
-// @Success 200 {string} json{"code","message"}
-// @Router /user/createUser [post]
+// @Accept application/json
+// @Param data body models.UserBasic true "data"
+// @Success 200 {string} json"{"code": 200,"message": "新增成功"}"
+// @Router /user [post]
 func CreateUser(c *gin.Context) {
 	userData := models.UserBasic{}
 	c.BindJSON(&userData)
@@ -56,4 +55,14 @@ func CreateUser(c *gin.Context) {
 		"message": "新增用户成功！",
 		"data":    user,
 	})
+}
+
+// DeleteUser
+// @Summary 删除用户
+// @Tags 用户模块
+// @param userId path string true "id"
+// @Success 200 {string} json{"code", "message"}
+// @Router /user/{userId} [delete]
+func DeleteUser(c *gin.Context) {
+
 }

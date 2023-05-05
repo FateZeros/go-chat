@@ -10,6 +10,8 @@ go mod tidy
 
 [gin-swagger](https://pkg.go.dev/github.com/swaggo/gin-swagger@v1.4.3#section-readme)
 
+[general_api_info](https://swaggo.github.io/swaggo.io/declarative_comments_format/general_api_info.html)
+
 ```bash
 go get -u github.com/swaggo/swag/cmd/swag
 

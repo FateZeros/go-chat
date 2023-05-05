@@ -9,7 +9,6 @@ import (
 )
 
 type UserBasic struct {
-	gorm.Model
 	Name          string `json:"name"`
 	PassWord      string `json:"password"`
 	Phone         string
@@ -34,4 +33,8 @@ func FindUserByName(name string) UserBasic {
 
 func CreateUser(user UserBasic) *gorm.DB {
 	return orm.DB.Create(&user)
+}
+
+func DeleteUser(user UserBasic) *gorm.DB {
+	return orm.DB.Delete(&user)
 }

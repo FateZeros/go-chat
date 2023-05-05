@@ -16,39 +16,95 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/user/createUser": {
+        "/user": {
             "post": {
+                "consumes": [
+                    "application/json"
+                ],
                 "tags": [
                     "用户模块"
                 ],
                 "summary": "新增用户",
                 "parameters": [
                     {
-                        "type": "string",
-                        "description": "用户名",
-                        "name": "name",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "密码",
-                        "name": "password",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "确认密码",
-                        "name": "repassword",
-                        "in": "query"
+                        "description": "data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.UserBasic"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "code\",\"message\"}",
+                        "description": "{\"code\": 200,\"message\": \"新增成功\"}",
                         "schema": {
                             "type": "string"
                         }
                     }
+                }
+            }
+        },
+        "/user/{userId}": {
+            "delete": {
+                "tags": [
+                    "用户模块"
+                ],
+                "summary": "删除用户",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "id",
+                        "name": "userId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "code\", \"message\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.UserBasic": {
+            "type": "object",
+            "properties": {
+                "clientIp": {
+                    "type": "string"
+                },
+                "clientPort": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "heartbeatTime": {
+                    "type": "string"
+                },
+                "identity": {
+                    "type": "string"
+                },
+                "loginOutTime": {
+                    "type": "string"
+                },
+                "loginTime": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
                 }
             }
         }
