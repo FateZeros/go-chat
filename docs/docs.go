@@ -46,6 +46,22 @@ const docTemplate = `{
                 }
             }
         },
+        "/user/list": {
+            "get": {
+                "tags": [
+                    "用户模块"
+                ],
+                "summary": "获取用户列表",
+                "responses": {
+                    "200": {
+                        "description": "code\", \"message\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/user/{userId}": {
             "delete": {
                 "tags": [
@@ -87,6 +103,9 @@ const docTemplate = `{
                 },
                 "heartbeatTime": {
                     "type": "string"
+                },
+                "id": {
+                    "type": "integer"
                 },
                 "identity": {
                     "type": "string"

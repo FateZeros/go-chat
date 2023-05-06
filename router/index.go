@@ -19,7 +19,10 @@ func Router() *gin.Engine {
 	// 首页
 	r.GET("/", service.GetIndex)
 
+	// 用户模块
 	r.POST("/user", service.CreateUser)
+	r.DELETE("/user/:id", service.DeleteUser)
+	r.GET("/user/list", service.GetUserList)
 
 	return r
 }

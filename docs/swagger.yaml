@@ -9,6 +9,8 @@ definitions:
         type: string
       heartbeatTime:
         type: string
+      id:
+        type: integer
       identity:
         type: string
       loginOutTime:
@@ -58,6 +60,16 @@ paths:
           schema:
             type: string
       summary: 删除用户
+      tags:
+      - 用户模块
+  /user/list:
+    get:
+      responses:
+        "200":
+          description: code", "message"}
+          schema:
+            type: string
+      summary: 获取用户列表
       tags:
       - 用户模块
 swagger: "2.0"
