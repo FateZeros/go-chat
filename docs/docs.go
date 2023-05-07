@@ -16,6 +16,22 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/login": {
+            "post": {
+                "tags": [
+                    "登录"
+                ],
+                "summary": "登录",
+                "responses": {
+                    "200": {
+                        "description": "code\", \"message\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/user": {
             "post": {
                 "consumes": [
@@ -27,8 +43,8 @@ const docTemplate = `{
                 "summary": "新增用户",
                 "parameters": [
                     {
-                        "description": "data",
-                        "name": "data",
+                        "description": "userData",
+                        "name": "userData",
                         "in": "body",
                         "required": true,
                         "schema": {

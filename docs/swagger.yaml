@@ -27,14 +27,24 @@ definitions:
 info:
   contact: {}
 paths:
+  /login:
+    post:
+      responses:
+        "200":
+          description: code", "message"}
+          schema:
+            type: string
+      summary: 登录
+      tags:
+      - 登录
   /user:
     post:
       consumes:
       - application/json
       parameters:
-      - description: data
+      - description: userData
         in: body
-        name: data
+        name: userData
         required: true
         schema:
           $ref: '#/definitions/models.UserBasic'
