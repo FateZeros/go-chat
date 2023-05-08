@@ -11,7 +11,7 @@ import (
 
 type LoginUser struct {
 	Name     string `json:"name"`
-	Password string `json:"pssword"`
+	Password string `json:"password"`
 }
 
 func PayloadFunc(data interface{}) jwt.MapClaims {
@@ -25,8 +25,9 @@ func PayloadFunc(data interface{}) jwt.MapClaims {
 
 func IdentityHandler(c *gin.Context) interface{} {
 	claims := jwt.ExtractClaims(c)
-	return &models.UserBasic{
-		Name: claims["Name"].(string),
+
+	return map[string]interface{}{
+		"IdentityKey": claims["identity"],
 	}
 }
 
@@ -34,6 +35,15 @@ func Authenticator(c *gin.Context) (interface{}, error) {
 	var loginUser LoginUser
 	if err := c.ShouldBind(&loginUser); err != nil {
 		return "", jwt.ErrMissingLoginValues
+	}
+	fmt.Printf("loginUser: %v\n", loginUser)
+
+	user := models.FindUserByNameAndPwd(loginUser.Name, loginUser.Password)
+	if user.Name != "" {
+		return &LoginUser{
+			Name:     loginUser.Name,
+			Password: loginUser.Password,
+		}, nil
 	}
 
 	return nil, jwt.ErrFailedAuthentication

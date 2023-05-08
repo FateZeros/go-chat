@@ -1,4 +1,4 @@
-package service
+package system
 
 import (
 	"fmt"
@@ -9,13 +9,47 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+type LoginUser struct {
+	Name     string `json:"name"`
+	Password string `json:"pssword"`
+}
+
+// Login
+// @Summary 登录
+// @Tags 登录
+// @Params
+// @Success 200 {string} json{"code", "message"}
+// @Router /login [post]
+func Login(c *gin.Context) {
+	var loginUser LoginUser
+	c.BindJSON(&loginUser)
+
+	fmt.Printf("loginUser: %v\n", loginUser)
+
+	user := models.FindUserByName(loginUser.Name)
+
+	if user.Name == "" {
+		c.JSON(200, gin.H{
+			"code":    -1,
+			"message": "该用户不存在",
+		})
+		return
+	}
+
+	c.JSON(200, gin.H{
+		"code":    0,
+		"message": "登录成功",
+		"data":    "",
+	})
+}
+
 // CreateUser
 // @Summary 新增用户
 // @Tags 用户模块
 // @Accept application/json
 // @Param userData body models.UserBasic true "userData"
 // @Success 200 {string} json"{"code": 200,"message": "新增成功"}"
-// @Router /user [post]
+// @Router /api/v1/user [post]
 func CreateUser(c *gin.Context) {
 	userData := models.UserBasic{}
 	c.BindJSON(&userData)
@@ -63,7 +97,7 @@ func CreateUser(c *gin.Context) {
 // @Tags 用户模块
 // @param userId path string true "id"
 // @Success 200 {string} json{"code", "message"}
-// @Router /user/{userId} [delete]
+// @Router /api/v1/user/{userId} [delete]
 func DeleteUser(c *gin.Context) {
 	user := models.UserBasic{}
 	id, err := strconv.Atoi(c.Param("id"))
@@ -83,7 +117,7 @@ func DeleteUser(c *gin.Context) {
 // @Summary 获取用户列表
 // @Tags 用户模块
 // @Success 200 {string} json{"code", "message"}
-// @Router /user/list [get]
+// @Router /api/v1/user/list [get]
 func GetUserList(c *gin.Context) {
 	list := make([]*models.UserBasic, 10)
 	list = models.GetUserList()

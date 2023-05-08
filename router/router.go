@@ -4,6 +4,8 @@ import (
 	"go-chat/docs"
 	"go-chat/handler"
 
+	systemRouter "go-chat/router/system"
+
 	jwt "github.com/appleboy/gin-jwt/v2"
 	"github.com/gin-gonic/gin"
 
@@ -19,6 +21,9 @@ func InitSysRouter(r *gin.Engine, authMiddleware *jwt.GinJWTMiddleware) *gin.Rou
 	// swagger router
 	sysSwaggerRouter(g)
 
+	// 需要认证的接口
+	sysAuthRouterInit(g, authMiddleware)
+
 	return g
 }
 
@@ -29,4 +34,15 @@ func sysSwaggerRouter(g *gin.RouterGroup) {
 
 func SysBaseRouter(g *gin.RouterGroup) {
 	g.GET("/ping", handler.Ping)
+}
+
+func sysAuthRouterInit(g *gin.RouterGroup, authMiddleware *jwt.GinJWTMiddleware) {
+	g.POST("/login", authMiddleware.LoginHandler)
+	// Refresh time can be longer than token timeout
+	g.GET("/refresh_token", authMiddleware.RefreshHandler)
+
+	v1 := g.Group("/api/v1")
+
+	// 用户
+	systemRouter.RegisterUserRouter(v1, authMiddleware)
 }

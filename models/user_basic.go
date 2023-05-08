@@ -46,3 +46,9 @@ func GetUserList() []*UserBasic {
 
 	return list
 }
+
+func FindUserByNameAndPwd(name string, password string) UserBasic {
+	user := UserBasic{}
+	orm.DB.Where("name = ? and pass_word = ?", name, password).First(&user)
+	return user
+}
