@@ -15,14 +15,14 @@ import (
 )
 
 func InitConfig() {
-	viper.SetConfigName("app")
+	viper.SetConfigName("settings")
 	viper.AddConfigPath("config")
 
 	err := viper.ReadInConfig()
 	if err != nil {
 		fmt.Println(err)
 	}
-	fmt.Println("config app inited ...")
+	fmt.Println("config settings inited ...")
 }
 
 func InitMySQL() {

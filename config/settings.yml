@@ -3,3 +3,8 @@ mysql:
 redis:
 port:
   server: ":6062"
+jwt:
+  secret: go-chat
+  timeout: 86400
+public:
+  location: true
